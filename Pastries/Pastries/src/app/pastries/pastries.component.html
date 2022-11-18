@@ -1,0 +1,41 @@
+<h1> {{ title }} </h1>
+
+<div class="col-sm-2">
+    <img width="25" class="glyph-icon" src="./assets/svg/loupe.svg" alt="disponibility" />
+    <input #name (keyup.enter)="search($event)" type="search" placeholder="Rechercher patisserie"/>
+</div>
+
+<div class="col-sm-4">
+    <app-pastrie-details [pastrie]="selectedPastry"></app-pastrie-details>
+</div>
+
+<div class="col-sm-8 pastrie">
+    <ul style="list-style: none;" *ngIf="pastries" >
+        <li style="margin-bottom: 20px" *ngFor = " let pastrie of pastries" >
+            <div class="card" appBorderCard="green" style="width: 70rem;">
+                <div class="card-header">
+                    {{ pastrie.ref }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ pastrie.name }}</h5>
+                    <p class="card-text">{{ pastrie.description }}</p>
+                    <ul style="list-style: none" class="list-inline" *ngIf="pastrie.tags">
+                        <li class="list-inline-item" *ngFor = " let tag of pastrie.tags">
+                            <span class="badge {{tag | pastryTagColor }}">{{tag}}</span>
+                        </li>
+                    </ul>
+                    <a class="btn btn-outline-dark" href="#" role="button">fr</a>
+                    <ng-template [ngIf]="pastrie.like">
+                        <img width="15" class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" alt="like" />
+                        <small>{{ pastrie.like }}</small>
+                    </ng-template>
+                    <ng-template [ngIf]="pastrie.quantity">
+                        <img width="15" class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" alt="disponibility" />
+                        <small>{{ pastrie.quantity }} unités disponibles</small>
+                    </ng-template>
+                </div>
+                <button class="btn btn-secondary" (click)="selectPastry(pastrie)">Détails</button>
+            </div>
+        </li>
+    </ul>
+</div>
