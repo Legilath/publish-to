@@ -24,13 +24,18 @@ export class PastriesComponent implements OnInit {
     this.selectedPastry = $pastry;
   }
 
-  addfilter($e:string){
-    this.ArrFilters.push($e);
+  addFilter($e:any){
+    this.ArrFilters.push($e.target.value);
+    this.inputName.nativeElement.value = "";
+    this.afficheSearch();
   }
 
-  search($e:any){// RESTE A FAIRE : créer des tags filters à afficher et la methode de supression des-dits tags...
-    this.addfilter($e.target.value);
-    this.inputName.nativeElement.value = "";
+  deleteFilter($filt:number){
+    this.ArrFilters.splice($filt, 1);
+    this.afficheSearch();
+  }
+
+  afficheSearch(){// RESTE A FAIRE : créer des tags filters à afficher et la methode de supression des-dits tags...
 
     let Arr: Array<Pastrie> = [];
 

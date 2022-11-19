@@ -8,7 +8,7 @@
         <h2>Liste des ingrédients</h2>
         <li *ngFor="let ingredient of ingredients; let index = index" class="list-group-item">
             {{ingredient}}
-            <button style="float: right;" class="btn btn-danger" (click)="deleteIng(index, pastrie.id)">
+            <button style="float: right;" class="btn btn-danger" (click)="deleteIng(index)">
                 <img width="25" class="glyph-icon" src="./assets/svg/trashcan.svg" alt="disponibility" />
             </button>
         </li>

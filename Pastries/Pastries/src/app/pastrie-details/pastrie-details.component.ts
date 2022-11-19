@@ -25,7 +25,7 @@ export class PastrieDetailsComponent implements OnInit {
     this.champ.nativeElement.value = "";
   }
 
-  deleteIng($ind:number, $id:string){
+  deleteIng($ind:number){
     this.ingredients.splice($ind, 1);
   }
 

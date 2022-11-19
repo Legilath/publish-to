@@ -2,7 +2,12 @@
 
 <div class="col-sm-2">
     <img width="25" class="glyph-icon" src="./assets/svg/loupe.svg" alt="disponibility" />
-    <input #name (keyup.enter)="search($event)" type="search" placeholder="Rechercher patisserie"/>
+    <input #name (keyup.enter)="addFilter($event)" type="search" placeholder="Rechercher patisserie"/>
+    <ul style="list-style: none" class="list-inline">
+        <button style="float: none; margin-right: 20px;" class="btn btn-danger btn-sm" *ngFor = "let filter of ArrFilters; let index = index;" (click)="deleteFilter(index)">
+            {{filter}}<img width="25" class="glyph-icon" src="./assets/svg/trashcan.svg" alt="disponibility" />
+        </button>
+    </ul>
 </div>
 
 <div class="col-sm-4">
