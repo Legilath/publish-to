@@ -12,6 +12,7 @@ export class PastriesComponent implements OnInit {
   pastries: Array<Pastrie> = PASTRIES;
   selectedPastry: Pastrie;
   ArrFilters: Array<string> = [];
+  ArrTagFilters: Array<string> = [];
   @ViewChild('name') inputName:any;
 
 
@@ -24,8 +25,18 @@ export class PastriesComponent implements OnInit {
     this.selectedPastry = $pastry;
   }
 
+  addtagFilter($tag:string){
+    this.ArrTagFilters.push($tag.toLowerCase());
+    this.afficheSearch();
+  }
+
+  deleteTagFilter($t:number){
+    this.ArrTagFilters.splice($t, 1);
+    this.afficheSearch();
+  }
+
   addFilter($e:any){
-    this.ArrFilters.push($e.target.value);
+    this.ArrFilters.push($e.target.value.toLowerCase());
     this.inputName.nativeElement.value = "";
     this.afficheSearch();
   }
@@ -35,19 +46,28 @@ export class PastriesComponent implements OnInit {
     this.afficheSearch();
   }
 
-  afficheSearch(){// RESTE A FAIRE : créer des tags filters à afficher et la methode de supression des-dits tags...
+  afficheSearch(){
 
     let Arr: Array<Pastrie> = [];
 
     for(let pastry of PASTRIES){
       let Ser = true;
       for(let filter of this.ArrFilters){
-        if(pastry.name.search(filter) === -1){
+        if(pastry.name.toLowerCase().search(filter) === -1){
           Ser = false;
         }
       }
+      for(let tag of this.ArrTagFilters){
+        let tagIs = false;
+        if(pastry.tags){
+          for(let pastryTag of pastry.tags){
+            if(pastryTag.toLowerCase().search(tag) !== -1){tagIs = true;}
+          }
+        }
+        if(tagIs === false){Ser = false;}
+      }
       if(Ser === true){
-        Arr.push(pastry)
+        Arr.push(pastry);
       };
     }
     this.pastries = Arr;

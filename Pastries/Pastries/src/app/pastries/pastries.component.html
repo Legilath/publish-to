@@ -7,6 +7,9 @@
         <button style="float: none; margin-right: 20px;" class="btn btn-danger btn-sm" *ngFor = "let filter of ArrFilters; let index = index;" (click)="deleteFilter(index)">
             {{filter}}<img width="25" class="glyph-icon" src="./assets/svg/trashcan.svg" alt="disponibility" />
         </button>
+        <button style="float: none; margin-right: 20px;" class="btn btn-danger btn-sm" *ngFor = "let tagFilter of ArrTagFilters; let index = index;" (click)="deleteTagFilter(index)">
+            {{tagFilter}}<img width="25" class="glyph-icon" src="./assets/svg/trashcan.svg" alt="disponibility" />
+        </button>
     </ul>
 </div>
 
@@ -26,7 +29,7 @@
                     <p class="card-text">{{ pastrie.description }}</p>
                     <ul style="list-style: none" class="list-inline" *ngIf="pastrie.tags">
                         <li class="list-inline-item" *ngFor = " let tag of pastrie.tags">
-                            <span class="badge {{tag | pastryTagColor }}">{{tag}}</span>
+                            <button class="badge {{tag | pastryTagColor }}" (click)="addtagFilter(tag)">{{tag}}</button>
                         </li>
                     </ul>
                     <a class="btn btn-outline-dark" href="#" role="button">fr</a>
